@@ -66,6 +66,9 @@ tool                                 description
 :ref:`hicPlotSVL`                    Computing short vs long range contacts and plotting the results
 :ref:`hicHyperoptDetectLoops`        Search for optimal hicDectectLoops parameters
 :ref:`hicHyperoptDetectLoopsHiCCUPS` Search for optimal Juicer HiCCUPS parameters
+:ref:`hicInterIntraTAD`              Extras and computes inter and intra TAD data
+:ref:`hicTrainTADClassifier`         Train a classifier to predict TADs with hicTADClassifier
+:ref:`hicTADClassifier`              Predict TAD boundaries with hicTADClassifier
 ==================================== ==========================================================================================================================================================
 
 Getting Help
@@ -82,6 +85,7 @@ Contents:
 
    content/installation
    content/list-of-tools
+   content/file-formats
    content/example_usage
    content/News
    content/citation

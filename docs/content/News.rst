@@ -2,6 +2,62 @@ News and Developments
 =====================
 
 
+Release 3.7.2
+-------------
+**1 October 2021**
+
+- Fixing a bug in hicHyperoptDetectLoops concerning the validation of the loop locations
+- Fixing a bug in hicValidateLocations concerning the computation of TADs
+- Adding the -v option for the version for hicInfo
+- Adding documentation concerning the native file formats of HiCExplorer
+- Fixing the way A/B compartments are computed based on Lieberman-Aiden 2009. The intermediate Pearson matrix is not used anymore.
+
+Release 3.7.1
+-------------
+**9 August 2021**
+
+The promised functions for the strand information in 3.7 were not part of the release due to confusion in merging multiple branches. Therefore they are now included in the 3.7.1 release:
+
+- hicAggregateContacts: Option to consider the strand orientation (#633)
+- hicAverageRegions: Option to consider the strand orientation (#633)
+
+Additionally, a small bug fix in hicInfo concerning the correct sum of the interaction matrix.
+
+Release 3.7
+-----------
+**27 July 2021**
+
+- A new TAD prediction method: `hicTADClassifier` and a method to train own classifiers `hicTrainTADClassifier`. Thanks @AlbertLidel for the design and implementation.
+- New file formats for capture Hi-C modules. `chicViewpoint`, `chicSignificantInteractions`, `chicAggregateStatistic` and `chicDifferentialTest` use now HDF5 based files. A new export script `chicExportData` is provided to retrieve text files from these HDF5 files.
+- Implementing a few feature requests:
+    - `hicPlotMatrix`: TADs can be visualized with hicPlotMatrix
+    - `hicAdjustMatrix` is able to remove intra- or inter-chromosomal contacts (#664, #704)
+    - `hicValidateLocations`: An option to validate TADs and to use additional data stored in `cool` matrices
+    - `hicPCA`: Adding a function to select which eigenvector should be used for the output (#669)
+    - `hicConvertFormat`: Adding the function to export hicpro file format and to import `2D-text` files.
+    - `hicFindRestSites`: Support of multiple restriction cut sequences (#659)
+    - `hicPlotMatrix`: Option for loop locations spanning more than one bin to define if the start, center or end should be used for plotting (#640)
+    - `hicInterIntraTAD`: A new script to compute the ratio of inter and intra TAD. ($404)
+    - `hicAggregateContacts`: Option to consider the strand orientation (#633)
+    - `hicAverageRegions`: Option to consider the strand orientation (#633)
+    - `hicCompareMatrices`: An option to not normalize the matrices before the computation. (#677, #645) Thanks @lldelisle
+    - `hicDifferentialTAD`: Adding rank sum statistics to the output (#728, #727). Thanks @dawe
+    - `hicPlotDistVsCounts`: Adding a function to plot the counts vs distance in TAD regions. (#696) Thanks @lldelisle
+- Bug fixes:
+     - `hicCorrectMatrix`: A bug that lead to wrong correction factors for the KR correction for `cool` files (#724)
+     - `hicDifferentialTAD`: Solved multicore issue related to skipping data at the start and end of chromosomes (#725, #685)
+     - `hicHyperoptDetectLoops`: Added an option to set if the `chr` prefix should be added or removed (#723)
+     - `hicPCA`: Solving an issue if the region defined by the gene track is larger the region stored in the interaction matrix (#655, #710, #716, #719)
+     - `hicPCA`: Fixing a bug where the masking of bins was automatically applied which lead to differing matrix dimensions for the e.g. the Pearson correlation matrices (#618)
+     - `hicBuildMatrix`: Solving a bug if multiple restriction cut sites have the same dangling ends (#720)
+     - `hicBuildMatrix`: Solving a bug that the parameter `--removeSelfLigations` was always set to true. Changed parameter name to `--keepSelfLigations` to keep the functionality. If the parameter is not set, the self ligations are removed.
+     - `hicBuildMatrix`: If a region is specified, only the restrictionCutSite file information for that region is loaded to save memory (#646)
+     - `hicConvertFormat`: Fixing a bug to copy the genome annotation information in the case of a `cool` to `cool` file conversion (#657)
+     - `hicCorrelate`: Correcting the range of colors for the heatmap (#585)
+     - `hicCompartmentalization`: Fixed index bug (#635, #637) Thanks  @LeilyR
+- Updating `hicBuildMatrix` to be able to work with biopython versions > 1.77. Thanks @lldelisle (#691)
+
+
 Release 3.6
 -----------
 **10 November 2020**
@@ -113,7 +169,7 @@ Release 3.4.2
 
 Preprint
 --------
-**6 March 2020*
+**6 March 2020**
 
 The preprint of the loop detection algorithm is online via biorXiv: `<https://www.biorxiv.org/content/10.1101/2020.03.05.979096v1>`_
 
