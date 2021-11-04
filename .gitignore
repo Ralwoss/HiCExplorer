@@ -43,3 +43,5 @@ nosetests.xml
 # pytest
 .pytest_cache/
 .cache
+
+.idea
