@@ -36,6 +36,7 @@ Uses a neural network trained by hicBuildNeuralNetwork to predict TAD boundaries
 
     parserRequired.add_argument('--binsize',
                                 help='bin size of the Hi-C matrix',
+                                type=int,
                                 required=True)
 
     parserRequired.add_argument('--model',
@@ -43,7 +44,7 @@ Uses a neural network trained by hicBuildNeuralNetwork to predict TAD boundaries
                                 required=True)
 
     parserRequired.add_argument('--indexShiftValue',
-                                help='Number of bins that the window will be shifted to the rightwhen constructing '
+                                help='Number of bins that the window will be shifted to the right when constructing '
                                      'inputs for the neural network. Ideally this is the same value as the center size '
                                      'to ensure search coverage of the whole genome',
                                 type=int,
@@ -98,10 +99,10 @@ def main(args=None):
                         b1 = sm_start + (window_size - 1) / 2 - start
                     elif b2 is None:
                         b2 = sm_start + (window_size - 1) / 2 - start
-                        o.write(f"{ch}\t{b1}\t{b2}\n")
+                        o.write(f"{ch}\t{int(b1*args.binsize)}\t{int(b2*args.binsize)}\n")
                     else:
                         b1, b2 = b2, sm_start + (window_size - 1) / 2 - start
-                        o.write(f"{ch}\t{b1}\t{b2}\n")
+                        o.write(f"{ch}\t{int(b1*args.binsize)}\t{int(b2*args.binsize)}\n")
                 sm_start += shift
                 sm_end += shift
 
